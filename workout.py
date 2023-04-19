@@ -28,6 +28,7 @@ class WorkoutManager:
             pass
 
     def create_workout(self):
+        print("Creating a new workout...")
         name = input("Name: ")
         muscle_group = input("Muscle group: ")
         reps_sets = input("Reps/Sets: ")
@@ -36,6 +37,7 @@ class WorkoutManager:
         workout = Workout(name, muscle_group, reps_sets, weight, difficulty)
         self.workouts.append(workout)
         print("Workout created successfully.")
+
 
 
 
@@ -81,7 +83,29 @@ class WorkoutManager:
 
 
     def save_data(self):
-        pass
-
+        data = {"workouts": [w.__dict__ for w in self.workouts]}
+        with open(self.data_file, "w") as f:
+            json.dump(data, f)
+        print("Data saved successfully.")
     def run(self):
-        pass
+        while True:
+            command = input("Enter a command (create, search, edit, delete, exit): ")
+            if command == "create":
+                self.create_workout()
+            elif command == "search":
+                self.search_workouts()
+            elif command == "edit":
+                self.edit_workout()
+            elif command == "delete":
+                self.delete_workout()
+            elif command == "exit":
+                self.save_data()
+                print("Exiting program.")
+                break
+            else:
+                print("Invalid command.")
+        print("Exited while loop.")
+if __name__ == '__main__':
+    data_file = 'workouts.json'
+    manager = WorkoutManager(data_file)
+    manager.run()
