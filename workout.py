@@ -3,7 +3,15 @@ import json
 
 class Workout:
     def __init__(self, name, muscle_group, reps_sets, weight, difficulty):
-        pass
+        self.name = name
+        self.muscle_group = muscle_group
+        self.reps_sets = reps_sets
+        self.weight = weight
+        self.difficulty = difficulty
+
+    def __str__(self):
+        return f"{self.name} ({self.muscle_group})"
+
 
 class WorkoutManager:
     def __init__(self, data_file):
