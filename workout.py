@@ -50,10 +50,35 @@ class WorkoutManager:
 
 
     def edit_workout(self):
-        pass
+        search_term = input("Enter the name of the workout to edit: ")
+        matching_workouts = [w for w in self.workouts if search_term.lower() in w.name.lower()]
+        if not matching_workouts:
+            print("No matching workouts found.")
+            return
+        elif len(matching_workouts) > 1:
+            print(f"Found {len(matching_workouts)} matching workouts. Please refine your search.")
+            return
+        workout = matching_workouts[0]
+        workout.name = input(f"Name ({workout.name}): ") or workout.name
+        workout.muscle_group = input(f"Muscle group ({workout.muscle_group}): ") or workout.muscle_group
+        workout.reps_sets = input(f"Reps/Sets ({workout.reps_sets}): ") or workout.reps_sets
+        workout.weight = input(f"Weight ({workout.weight}): ") or workout.weight
+        workout.difficulty = input(f"Difficulty ({workout.difficulty}): ") or workout.difficulty
+        print("Workout edited successfully.")
 
     def delete_workout(self):
-        pass
+        search_term = input("Enter the name of the workout to delete: ")
+        matching_workouts = [w for w in self.workouts if search_term.lower() in w.name.lower()]
+        if not matching_workouts:
+            print("No matching workouts found.")
+            return
+        elif len(matching_workouts) > 1:
+            print(f"Found {len(matching_workouts)} matching workouts. Please refine your search.")
+            return
+        workout = matching_workouts[0]
+        self.workouts.remove(workout)
+        print("Workout deleted successfully.")
+
 
     def save_data(self):
         pass
